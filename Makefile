@@ -17,6 +17,9 @@ run_app:
 run_app_instrumented:
 		@opentelemetry-instrument --traces_exporter console --metrics_exporter console --logs_exporter console --service_name dice-server flask run -p 8080
 
+run_app_instrumented_collector:
+		@opentelemetry-instrument --logs_exporter otlp flask run -p 8080
+
 run_collector:
 	@docker run -p 4317:4317 --volume $$(pwd)/configs:/etc/otel otel/opentelemetry-collector:latest --config=/etc/otel/otel-collector.yaml
 
